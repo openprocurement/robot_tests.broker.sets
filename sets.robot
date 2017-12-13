@@ -556,8 +556,8 @@ Login
     ${title}=    Get From Dictionary    ${ARGUMENTS[2].data}    title
     ${description}=    Get From Dictionary    ${ARGUMENTS[2].data}    description
     sets.Пошук тендера по ідентифікатору    ${ARGUMENTS[0]}    ${ARGUMENTS[1]}
-    Wait Until Page Contains Element    id = tab-2
-    Click Element    id = tab-2
+    Wait Until Page Contains Element    id = tab-selector-2
+    Click Element    id = tab-selector-2
     Wait Until Page Contains Element    id= create-question-btn
     Click Element    id=create-question-btn
     Sleep    1
@@ -570,7 +570,7 @@ Login
   [Arguments]  ${username}  ${tender_uaid}  ${item_id}  ${question}
   sets.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
   Sleep    2
-  Click Element     id = question[${item_id}].item
+  Click Element     id = ${item_id}item
   Sleep  3
   Input text          id=question-title                 ${question.data.title}
   Input text          id=question-description          ${question.data.description}
@@ -614,8 +614,9 @@ Login
 Відповісти на запитання
     [Arguments]  ${username}  ${tender_uaid}  ${answer_data}  ${question_id}
     sets.Перейти до сторінки запитань    ${username}  ${tender_uaid}
+    Click Element    id = tab-selector-2
+    Wait Until Element Is Visible  id = question[${question_id}].answer
     Click Element    id = question[${question_id}].answer
-    Sleep    3
     Input Text    id=questions-answer    ${answer_data.data.answer}
     Click Element    id=create-question-btn
     Click Element    id = tab-selector-2
@@ -623,7 +624,7 @@ Login
 Перейти до сторінки запитань
     [Arguments]    ${username}    ${tender_uaid}
     sets.Пошук тендера по ідентифікатору    ${username}    ${tender_uaid}
-    Sleep    10
+    Sleep    1
     Click Element    id = tab-selector-2
 
 Отримати інформацію із запитання
@@ -798,7 +799,7 @@ ConvToStr And Input Text
     ...      ${ARGUMENTS[2]} = cancellation_reason
     ...      ${ARGUMENTS[3]} = doc_path
     ...      ${ARGUMENTS[4]} = description
-    Go To    https://proumstrade.com.ua/lots/index
+    Click Element    id = cabinet
     Sleep   2
     Input Text    name = LotSearch[auctionID]    ${ARGUMENTS[1]}
     Click Element    name = LotSearch[name]
