@@ -377,6 +377,7 @@ Login
 
 Отримати інформацію про tenderAttempts
     ${return_value}=    Get Text    id=auction-tenderAttempts
+    ${return_value}=    Convert To Integer    ${return_value}
     [Return]    ${return_value}
 
 Отримати інформацію про tender.data.auctionUrl
@@ -642,7 +643,7 @@ Login
     sleep    2
     Click Element    id = bid-create-btn
     Sleep    2s
-    Click Element    id = bids-oferta
+    Run Keyword If    ${bid['data'].qualified} != ${False}    Click Element    id=bids-oferta
     ${amount}=    Convert To String    ${bid.data.value.amount}
     Input Text    id=bids-value_amount    ${amount}
     Sleep    2
@@ -869,7 +870,7 @@ ConvToStr And Input Text
     sets.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
     Wait Until Page Contains Element    id=bids[0].link
     Click Element    id=bids[0].link
-    Click Element    id = confirm-protocol-btn
+    Wait Until Page Contains Element    id = confirm-payment-btn
 
 Підтвердити підписання контракту
     [Arguments]    ${username}    ${tender_uaid}    ${contract_num}
