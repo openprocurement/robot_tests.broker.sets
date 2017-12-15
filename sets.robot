@@ -867,7 +867,7 @@ ConvToStr And Input Text
 
 Підтвердити наявність протоколу аукціону
     [Arguments]  ${username}  ${tender_uaid}  ${award_index}
-    kme.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
+    sets.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
     Wait Until Page Contains Element    name = winner
     Click Element    name = winner
     Wait Until Page Contains Element    id = confirm-payment-btn
