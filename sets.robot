@@ -377,7 +377,11 @@ Login
 
 Отримати інформацію про tenderAttempts
     ${return_value}=    Get Text    id=auction-tenderAttempts
+<<<<<<< HEAD
     ${return_value}=    Convert To String    ${return_value}
+=======
+    ${return_value}=    Convert To Integer    ${return_value}
+>>>>>>> f0ab4af1eb42e73c264436fd215d0c874b0fd0c1
     [Return]    ${return_value}
 
 Отримати інформацію про tender.data.auctionUrl
@@ -867,10 +871,10 @@ ConvToStr And Input Text
 
 Підтвердити наявність протоколу аукціону
     [Arguments]  ${username}  ${tender_uaid}  ${award_index}
-    sets.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
-    Wait Until Page Contains Element    id=bids[0].link
-    Click Element    id=bids[0].link
-    Run Keyword If    ${bid['data'].qualified} != ${False}    Click Element    id=bids-oferta
+    kme.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
+    Wait Until Page Contains Element    name = winner
+    Click Element    name = winner
+    Wait Until Page Contains Element    id = confirm-payment-btn
 
 Підтвердити підписання контракту
     [Arguments]    ${username}    ${tender_uaid}    ${contract_num}
