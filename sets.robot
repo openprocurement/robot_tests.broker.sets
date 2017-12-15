@@ -377,6 +377,7 @@ Login
 
 Отримати інформацію про tenderAttempts
     ${return_value}=    Get Text    id=auction-tenderAttempts
+    ${return_value}=    Convert To Integer    ${return_value}
     [Return]    ${return_value}
 
 Отримати інформацію про tender.data.auctionUrl
@@ -563,7 +564,7 @@ Login
     Sleep    1
     Input text    id=question-title    ${title}
     Input text    id=question-description    ${description}
-    Click Element    id= create-question-btn
+    Click Element    id= submit-question-btn
     ${description}=    Get From Dictionary    ${ARGUMENTS[2].data}    description
 
 Задати запитання на предмет
@@ -574,7 +575,7 @@ Login
   Sleep  3
   Input text          id=question-title                 ${question.data.title}
   Input text          id=question-description          ${question.data.description}
-  Click Element     id=create-question-btn
+  Click Element     id=submit-question-btn
   Sleep  3
 
 Задати запитання на тендер
@@ -642,7 +643,7 @@ Login
     sleep    2
     Click Element    id = bid-create-btn
     Sleep    2s
-    Click Element    id = bids-oferta
+    Run Keyword If    ${bid['data'].qualified} != ${False}    Click Element    id=bids-oferta
     ${amount}=    Convert To String    ${bid.data.value.amount}
     Input Text    id=bids-value_amount    ${amount}
     Sleep    2
@@ -867,9 +868,9 @@ ConvToStr And Input Text
 Підтвердити наявність протоколу аукціону
     [Arguments]  ${username}  ${tender_uaid}  ${award_index}
     sets.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
-    Wait Until Page Contains Element    id=bids[0].link
-    Click Element    id=bids[0].link
-    Click Element    id = confirm-protocol-btn
+    Wait Until Page Contains Element    name = winner
+    Click Element    name = winner
+    Wait Until Page Contains Element    id = confirm-payment-btn
 
 Підтвердити підписання контракту
     [Arguments]    ${username}    ${tender_uaid}    ${contract_num}
