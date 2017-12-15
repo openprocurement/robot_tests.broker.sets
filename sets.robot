@@ -564,7 +564,7 @@ Login
     Sleep    1
     Input text    id=question-title    ${title}
     Input text    id=question-description    ${description}
-    Click Element    id= create-question-btn
+    Click Element    id= submit-question-btn
     ${description}=    Get From Dictionary    ${ARGUMENTS[2].data}    description
 
 Задати запитання на предмет
@@ -575,7 +575,7 @@ Login
   Sleep  3
   Input text          id=question-title                 ${question.data.title}
   Input text          id=question-description          ${question.data.description}
-  Click Element     id=create-question-btn
+  Click Element     id=submit-question-btn
   Sleep  3
 
 Задати запитання на тендер
@@ -867,9 +867,9 @@ ConvToStr And Input Text
 
 Підтвердити наявність протоколу аукціону
     [Arguments]  ${username}  ${tender_uaid}  ${award_index}
-    sets.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
-    Wait Until Page Contains Element    id=bids[0].link
-    Click Element    id=bids[0].link
+    kme.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
+    Wait Until Page Contains Element    name = winner
+    Click Element    name = winner
     Wait Until Page Contains Element    id = confirm-payment-btn
 
 Підтвердити підписання контракту
