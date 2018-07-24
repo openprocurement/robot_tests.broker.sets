@@ -176,14 +176,15 @@ Login
     Input text    id = items-description_en    ${item.description_en}
     Input text    id = items-quantity    ${quantity}
     Select from list by value    id = items-unit_code    ${item.unit.code}
-    Select from list by value    id = items-additionalclassifications    ${item.additionalClassifications[0].id}
     Input text    id = items-address_locality    ${item.address.locality}
     Input text    id = items-address_postalcode    ${item.address.postalCode}
     Select from list by value    id = items-address_region    ${item.address.region}
     Input text    id = items-address_streetaddress    ${item.address.streetAddress}
-    Input text    id = items-classification_id    ${item.classification.id}
+    Input text    id = search-c    ${item.classification.id}
+    Натиснути    //a[contains(text(), '${item.classification.id}') and contains(@class, 'jstree-search')]/*[1]
+    Sleep    1
 
-    Натиснути    id = save-btn
+    Неквапливо натиснути    id = save-btn
 
 Оновити дані
     Натиснути    id=refresh-btn
